@@ -9,7 +9,11 @@ jobs:
       - checkout
       - run:
           name: Install PyInstaller and Astropy
-          command: pip3 install pyinstaller git+https://github.com/astrofrog/astropy@pyinstaller
+          command: pip3 install pyinstaller astropy
+          # command: pip3 install pyinstaller git+https://github.com/astrofrog/astropy@pyinstaller
+      - run:
+          name: Update pip and setuptools
+          command: pip3 install pip setuptools --upgrade
       - run:
           name: Run PyInstaller
           command: pyinstaller --onefile test.py
