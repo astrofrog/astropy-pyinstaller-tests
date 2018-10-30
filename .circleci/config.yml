@@ -8,18 +8,18 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install PyInstaller and Astropy
-          command: pip3 install pyinstaller astropy
-          # command: pip3 install pyinstaller git+https://github.com/astrofrog/astropy@pyinstaller
-      - run:
           name: Update pip and setuptools
           command: pip3 install pip setuptools --upgrade
+      - run:
+          name: Install PyInstaller and Astropy
+          command: pip3 install --progress-bar off pyinstaller astropy
+          # command: pip3 install --progress-bar off pyinstaller git+https://github.com/astrofrog/astropy@pyinstaller
       - run:
           name: Run PyInstaller
           command: pyinstaller --onefile test.py
       - run:
           name: Try out resulting binary
-          command: dist/test/test
+          command: dist/test
 
 workflows:
   version: 2
