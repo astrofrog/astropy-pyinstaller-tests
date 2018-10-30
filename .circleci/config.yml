@@ -1,0 +1,24 @@
+version: 2
+
+jobs:
+
+  test-pyinstaller:
+    docker:
+      - image: astropy/image-tests-py35-base:1.0
+    steps:
+      - checkout
+      - run:
+          name: Install PyInstaller and Astropy
+          command: pip3 install pyinstaller git+https://github.com/astrofrog/astropy@pyinstaller
+      - run:
+          name: Run PyInstaller
+          command: pyinstaller --onefile test.py
+      - run:
+          name: Try out resulting binary
+          command: dist/test/test
+
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - test-pyinstaller
